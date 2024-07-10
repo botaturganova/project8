@@ -77,7 +77,9 @@ class ViewController: UIViewController {
         
         submit.layer.borderWidth = 1
         submit.layer.borderColor = UIColor.lightGray.cgColor
-
+        clear.layer.borderWidth = 1
+        clear.layer.borderColor = UIColor.lightGray.cgColor
+        
         
         let buttonsView = UIView()
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
