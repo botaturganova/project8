@@ -75,6 +75,10 @@ class ViewController: UIViewController {
         view.addSubview(clear)
         clear.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
         
+        submit.layer.borderWidth = 1
+        submit.layer.borderColor = UIColor.lightGray.cgColor
+
+        
         let buttonsView = UIView()
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonsView)
