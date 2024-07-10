@@ -22,10 +22,7 @@ class ViewController: UIViewController {
             scoreLabel.text = "Score: \(score)"
         }
     }
-
     var level = 1
-
-
     
     override func loadView() {
         view = UIView()
@@ -79,7 +76,6 @@ class ViewController: UIViewController {
         submit.layer.borderColor = UIColor.lightGray.cgColor
         clear.layer.borderWidth = 1
         clear.layer.borderColor = UIColor.lightGray.cgColor
-        
         
         let buttonsView = UIView()
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
@@ -154,14 +150,19 @@ class ViewController: UIViewController {
 
             currentAnswer.text = ""
             score += 1
-            
+
             if score % 7 == 0 {
                 let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
+        } else {
+            let ac = UIAlertController(title: "Alert", message: "Failed to find the guess", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
         }
     }
+        
     func levelUp(action: UIAlertAction) {
         level += 1
         solutions.removeAll(keepingCapacity: true)
