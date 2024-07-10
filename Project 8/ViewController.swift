@@ -150,19 +150,23 @@ class ViewController: UIViewController {
 
             currentAnswer.text = ""
             score += 1
-
-            if score % 7 == 0 {
+            
+            if letterButtons.allSatisfy({ $0.isHidden }) {
                 let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
         } else {
+            score -= 1
             let ac = UIAlertController(title: "Alert", message: "Failed to find the guess", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
+            
+            
         }
     }
-        
+    
+    
     func levelUp(action: UIAlertAction) {
         level += 1
         solutions.removeAll(keepingCapacity: true)
@@ -180,7 +184,6 @@ class ViewController: UIViewController {
         for btn in activatedButtons {
             btn.isHidden = false
         }
-
         activatedButtons.removeAll()
     }
     
