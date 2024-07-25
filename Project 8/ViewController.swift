@@ -22,7 +22,10 @@ class ViewController: UIViewController {
             scoreLabel.text = "Score: \(score)"
         }
     }
+
     var level = 1
+
+
     
     override func loadView() {
         view = UIView()
@@ -73,8 +76,8 @@ class ViewController: UIViewController {
         clear.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
         
         submit.layer.borderWidth = 1
-        submit.layer.borderColor = UIColor.lightGray.cgColor
         clear.layer.borderWidth = 1
+        submit.layer.borderColor = UIColor.lightGray.cgColor
         clear.layer.borderColor = UIColor.lightGray.cgColor
         
         let buttonsView = UIView()
@@ -130,6 +133,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadLevel()
+      
+
     }
     @objc func letterTapped(_ sender: UIButton) {
         guard let buttonTitle = sender.titleLabel?.text else { return }
@@ -140,9 +145,10 @@ class ViewController: UIViewController {
     
     @objc func submitTapped(_ sender: UIButton) {
         guard let answerText = currentAnswer.text else { return }
-
         if let solutionPosition = solutions.firstIndex(of: answerText) {
             activatedButtons.removeAll()
+        
+            
 
             var splitAnswers = answersLabel.text?.components(separatedBy: "\n")
             splitAnswers?[solutionPosition] = answerText
@@ -151,22 +157,14 @@ class ViewController: UIViewController {
             currentAnswer.text = ""
             score += 1
             
-            if letterButtons.allSatisfy({ $0.isHidden }) {
+            if score % 7 == 0 {
                 let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
-        } else {
-            score -= 1
-            let ac = UIAlertController(title: "Alert", message: "Failed to find the guess", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
-            
-            
         }
+       
     }
-    
-    
     func levelUp(action: UIAlertAction) {
         level += 1
         solutions.removeAll(keepingCapacity: true)
@@ -184,6 +182,7 @@ class ViewController: UIViewController {
         for btn in activatedButtons {
             btn.isHidden = false
         }
+
         activatedButtons.removeAll()
     }
     
